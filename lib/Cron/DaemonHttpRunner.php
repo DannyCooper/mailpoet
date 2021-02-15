@@ -48,6 +48,7 @@ class DaemonHttpRunner {
   }
 
   public function run($requestData) {
+    //file_put_contents(__DIR__ . '/../../tests/_output/cronLog.txt', "Started \n" . json_encode(debug_backtrace()) . " \n\n\n", FILE_APPEND);
     ignore_user_abort(true);
     if (strpos((string)@ini_get('disable_functions'), 'set_time_limit') === false) {
       set_time_limit(0);

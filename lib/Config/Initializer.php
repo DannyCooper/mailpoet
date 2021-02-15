@@ -114,6 +114,7 @@ class Initializer {
   }
 
   public function init() {
+    file_put_contents(__DIR__ . '/../../tests/_output/cronLog.txt', "Init (" . "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" . ") \n" . json_encode(debug_backtrace()) . " \n\n\n", FILE_APPEND);
     // load translations
     $this->setupLocalizer();
 

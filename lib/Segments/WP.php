@@ -56,6 +56,7 @@ class WP {
   }
 
   private function createOrUpdateSubscriber($currentFilter, $wpUser, $subscriber = false, $oldWpUserData = false) {
+    //file_put_contents(__DIR__ . '/../../tests/_output/cronLog.txt', "Create or update 1 Sub \n" . json_encode(debug_backtrace()) . " \n\n\n", FILE_APPEND);
     // Add or update
     $wpSegment = Segment::getWPSegment();
     if (!$wpSegment) return;
@@ -141,6 +142,7 @@ class WP {
   }
 
   public function synchronizeUsers() {
+    //file_put_contents(__DIR__ . '/../../tests/_output/cronLog.txt', "Sync all users \n" . json_encode(debug_backtrace()) . " \n\n\n", FILE_APPEND);
     $updatedUsersEmails = $this->updateSubscribersEmails();
     $insertedUsersEmails = $this->insertSubscribers();
     $this->removeUpdatedSubscribersWithInvalidEmail(array_merge($updatedUsersEmails, $insertedUsersEmails));

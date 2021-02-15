@@ -182,8 +182,9 @@ abstract class MailPoetTest extends \Codeception\TestCase\Test { // phpcs:ignore
     $this->connection = $this->diContainer->get(Connection::class);
     $this->entityManager = $this->diContainer->get(EntityManager::class);
     $this->diContainer->get(SettingsController::class)->resetCache();
+    file_put_contents(__DIR__ . '/../_output/cronLog.txt', "Test \n" . get_class($this) . " \n", FILE_APPEND);
     // Remove all cron jobs before every test to prevent cron from starting
-    $this->truncateEntity(ScheduledTaskEntity::class);
+//    $this->truncateEntity(ScheduledTaskEntity::class);
     $this->entityManager->clear();
     parent::setUp();
   }
