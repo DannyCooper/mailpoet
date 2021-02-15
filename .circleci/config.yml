@@ -537,7 +537,6 @@ workflows:
           group_arg: -g acceptance_group_5
       - integration_tests:
           <<: *slack-fail-post-step
-          <<: *only_master_and_release
           name: integration_tests_multisite
           setup_command: source ./.circleci/setup.bash && setup php7_multisite
           run_command: ./do test:multisite-integration --xml

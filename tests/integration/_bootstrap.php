@@ -1,6 +1,7 @@
 <?php
 
 use MailPoet\DI\ContainerWrapper;
+use MailPoet\Entities\ScheduledTaskEntity;
 use MailPoet\Settings\SettingsController;
 use MailPoetVendor\Doctrine\DBAL\Connection;
 use MailPoetVendor\Doctrine\ORM\EntityManager;
@@ -181,6 +182,8 @@ abstract class MailPoetTest extends \Codeception\TestCase\Test { // phpcs:ignore
     $this->connection = $this->diContainer->get(Connection::class);
     $this->entityManager = $this->diContainer->get(EntityManager::class);
     $this->diContainer->get(SettingsController::class)->resetCache();
+    // Remove all cron jobs before every test to prevent cron from starting
+    $this->truncateEntity(ScheduledTaskEntity::class);
     $this->entityManager->clear();
     parent::setUp();
   }
