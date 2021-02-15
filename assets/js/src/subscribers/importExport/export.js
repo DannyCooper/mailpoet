@@ -106,7 +106,7 @@ jQuery(document).ready(function documentReady() {
     'global_status',
   ]).trigger('change');
 
-  nextStepButton.click(function nextClick() {
+  nextStepButton.on('click', function nextClick() {
     var exportFormat;
     if (jQuery(this).hasClass('mailpoet-disabled')) {
       return;
