@@ -9,6 +9,7 @@ use MailPoet\Models\SubscriberCustomField;
 use MailPoet\Models\SubscriberSegment;
 use MailPoet\Segments\WP;
 use MailPoet\Subscribers\ImportExport\Import\Import;
+use MailPoetVendor\Carbon\Carbon;
 use MailPoetVendor\Idiorm\ORM;
 
 class ImportTest extends \MailPoetTest {
@@ -456,9 +457,10 @@ class ImportTest extends \MailPoetTest {
     expect($newSubscribers[1]->source)->equals('imported');
     expect(strlen($newSubscribers[0]->link_token))->equals(Subscriber::LINK_TOKEN_LENGTH);
     expect(strlen($newSubscribers[1]->link_token))->equals(Subscriber::LINK_TOKEN_LENGTH);
-    $testTime = date('Y-m-d H:i:s', $this->testData['timestamp']);
-    expect($newSubscribers[0]->last_subscribed_at)->equals($testTime);
-    expect($newSubscribers[1]->last_subscribed_at)->equals($testTime);
+    $lastSubscribed1 = Carbon::createFromFormat('Y-m-d H:i:s', $newSubscribers[0]->last_subscribed_at);
+    $lastSubscribed2 = Carbon::createFromFormat('Y-m-d H:i:s', $newSubscribers[1]->last_subscribed_at);
+    expect($lastSubscribed1->getTimestamp())->equals($this->testData['timestamp'], 1);
+    expect($lastSubscribed2->getTimestamp())->equals($this->testData['timestamp'], 1);
   }
 
   public function testItDoesNotUpdateExistingSubscribersLastSubscribedAtWhenItIsPresent() {
