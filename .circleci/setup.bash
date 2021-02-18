@@ -53,6 +53,10 @@ function setup {
 	# Softlink plugin to plugin path
 	ln -s ../../.. wordpress/wp-content/plugins/mailpoet
 
+	touch ./tests/_output/cronLog.txt
+	chmod 777 ./tests/_output/cronLog.txt
+	ls -la ./tests/_output/cronLog.txt
+
 	# Activate plugin
 	if [[ $version == "php7_multisite" ]]; then
 	    wp plugin activate mailpoet --url=http://mailpoet.loc/php7_multisite/ $wp_cli_wordpress_path $wp_cli_allow_root

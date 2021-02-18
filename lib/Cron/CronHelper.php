@@ -104,7 +104,7 @@ class CronHelper {
       CronDaemonEndpoint::ACTION_PING_RESPONSE
     );
     $settings = $this->settings->getAll();
-    file_put_contents(__DIR__ . '/../../tests/_output/cronLog.txt', "Ping Daemon ($url) \n" . json_encode(debug_backtrace()) . " \n\n" . json_encode($settings) . "\n\n", FILE_APPEND);
+    file_put_contents(__DIR__ . '/../../tests/_output/cronLog.txt', "Ping Daemon ($url) \n\n" . json_encode($settings) . "\n\n", FILE_APPEND);
     $result = $this->queryCronUrl($url);
     if (is_wp_error($result)) return $result->get_error_message();
     $response = $this->wp->wpRemoteRetrieveBody($result);
