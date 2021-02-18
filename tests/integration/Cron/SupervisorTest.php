@@ -9,6 +9,7 @@ use MailPoet\Settings\SettingsController;
 use MailPoet\Settings\SettingsRepository;
 
 class SupervisorTest extends \MailPoetTest {
+  /** @var Supervisor */
   public $supervisor;
   public $cronHelper;
   /** @var SettingsController */
@@ -24,6 +25,7 @@ class SupervisorTest extends \MailPoetTest {
     $this->settings->set('cron_trigger', [
       'method' => 'none',
     ]);
+    $this->settings->set(CronHelper::DAEMON_SETTING, null);
     $this->cronHelper = ContainerWrapper::getInstance()->get(CronHelper::class);
     $this->supervisor = ContainerWrapper::getInstance()->get(Supervisor::class);
   }
