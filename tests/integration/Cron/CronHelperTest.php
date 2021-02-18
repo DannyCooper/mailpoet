@@ -321,7 +321,7 @@ class CronHelperTest extends \MailPoetTest {
     $pingResponse = null;
     // because sometimes wp_remote_post ends with timeout we want to try three times
     for ($i = 1; $i <= 3; $i++) {
-      $pingResponse = $this->cronHelper->pingDaemon();
+      $pingResponse = $this->cronHelper->pingDaemon($i * CronHelper::DAEMON_REQUEST_TIMEOUT);
       if (strpos('cURL error 28', $pingResponse) !== false) {
         break;
       }
